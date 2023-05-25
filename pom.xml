@@ -16,6 +16,16 @@
 	<properties>
 		<java.version>20</java.version>
 	</properties>
+
+	<developers>
+		<developer>
+			<email>noreply@makersweb.com.br</email>
+			<id>aaristides</id>
+			<name>Anderson Orione Aristides</name>
+			<url>https://www.makersweb.com.br</url>
+		</developer>
+	</developers>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

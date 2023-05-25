@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: product
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/productdb}
+    username: ${DATABASE_USERNAME:product_user}
+    password: ${DATABASE_PASSWORD:Salmos89}
+    tomcat:
+      test-on-borrow: true # Valide a conexão antes de pedir emprestado a partir do pool.
+      max-active: 50 # Número máximo de conexões ativas que podem ser alocadas a partir deste pool ao mesmo tempo.
+    hikari:
+      auto-commit: false
+      connection-timeout: 250 # É uma configuração em milliseconds. O ideal é manter baixo para que estoure timeout logo e não prenda as threads
+      max-lifetime: 600000 # Tempo máximo que uma conexão pode ficar aberta (10 min) - security
+      maximum-pool-size: 20 # Mantemos até 20 conexões com banco de dados. O ideal é manter baixo mesmo, pois é algo custoso para o banco gerenciar.
+      minimum-idle: 10
+      pool-name: master
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    properties:
+      '[hibernate.connection.provider_disables_autocommit]': true # Para aumentar a performance ao máximo, desabilitamos o auto-commit e o open-in-view.
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        generate_statistics: false
+  flyway:
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:/db/migration
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+    date-format: yyyy-MM-dd
