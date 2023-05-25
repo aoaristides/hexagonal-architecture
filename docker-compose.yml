@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+
+  db:
+    container_name: postgres_container
+    image: postgres:12
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=Salmos89
+      - POSTGRES_USER=person_user
+      - POSTGRES_DB=persondb
+    volumes:
+      - './.docker/db/data:/var/lib/postgresql/data'
+    networks:
+      - db-net
+
+networks:
+  db-net:
+    driver: bridge
