@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>20</java.version>
+		<jakarta.validation.version>3.0.2</jakarta.validation.version>
 	</properties>
 
 	<developers>
@@ -38,6 +39,11 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta.validation.version}</version>
 		</dependency>
 
 		<dependency>

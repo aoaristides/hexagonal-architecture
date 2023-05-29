@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * @author aaristides
  */
-@AllArgsConstructor
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("products")
 public class ProductController {

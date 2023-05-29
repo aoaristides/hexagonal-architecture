@@ -16,6 +16,20 @@ services:
     networks:
       - db-net
 
+  localstack:
+    container_name: localstack
+    image: localstack/localstack
+    ports:
+      - '4566-4599:4566-4599'
+      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+    environment:
+      - SERVICES=apigateway,cloudformation,cloudwatch,dynamodb,ec2,es,firehose,iam,kinesis,kms,lambda,route53,redshift,s3,secretmanager,ses,sns,sqs,ssm,stepfunctions,sts
+      - EDGE_PORT=4566
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
 networks:
   db-net:
     driver: bridge
